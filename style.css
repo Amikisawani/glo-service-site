@@ -1,0 +1,239 @@
+    /* Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background: #f9f9f9;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+    background: linear-gradient(135deg, #1b2422 0%, #081716 100%);
+    color: #fff;
+    padding: 1.5rem 1rem;
+    position: relative;
+    overflow: hidden;
+    }
+    .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* centré horizontalement */
+    gap: 1.5rem; /* espace entre logo et texte */
+    flex-wrap: wrap;
+    text-align: left;
+    }
+    .logo {
+    max-width: 120px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    animation: fadeIn 1.5s ease forwards;
+    }
+    .header-text h1 {
+    font-size: 2.6rem;
+    margin-bottom: 0.3rem;
+    font-weight: 700;
+    animation: slideDown 1s ease forwards;
+    }
+    .header-text p {
+    font-size: 1.2rem;
+    font-style: italic;
+    opacity: 0.9;
+    animation: fadeIn 2s ease forwards;
+    }
+    /* Responsive : logo au-dessus du texte */
+    @media (max-width: 700px) {
+    .header-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .logo {
+        max-width: 90px;
+        margin-bottom: 0.8rem;
+    }
+    }
+    
+    nav {
+      background: #00796b;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      color: #e0f2f1;
+      text-decoration: none;
+      padding: 1rem 1.8rem;
+      font-weight: 600;
+      transition: background 0.3s ease, color 0.3s ease;
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 5px;
+      left: 50%;
+      background-color: #004d40;
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    nav a:hover,
+    nav a:focus {
+      background: #004d40;
+      color: #a7ffeb;
+      outline: none;
+    }
+    nav a:hover::after,
+    nav a:focus::after {
+      width: 50%;
+      left: 25%;
+    }
+    main {
+      flex-grow: 1;
+      max-width: 1000px;
+      margin: 2rem auto 3rem;
+      padding: 0 1rem;
+    }
+    section {
+      background: #fff;
+      padding: 2rem 2.5rem;
+      margin-bottom: 3rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgb(0 0 0 / 0.1);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s forwards;
+    }
+    section:nth-child(odd) {
+      animation-delay: 0.3s;
+    }
+    section:nth-child(even) {
+      animation-delay: 0.6s;
+    }
+    section h2 {
+      color: #00796b;
+      margin-bottom: 1rem;
+      border-bottom: 3px solid #004d40;
+      padding-bottom: 0.4rem;
+      font-size: 2rem;
+    }
+    section h3 {
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: #004d40;
+    }
+    section p,
+    section ul {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+    ul {
+      list-style-type: disc;
+      padding-left: 1.8rem;
+    }
+    ul li {
+      margin-bottom: 0.6rem;
+    }
+    .highlight {
+      color: #004d40;
+      font-weight: 700;
+    }
+    .contact-info {
+      font-weight: 600;
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+    }
+    a.button {
+      display: inline-block;
+      background: #004d40;
+      color: #e0f2f1;
+      padding: 0.7rem 1.6rem;
+      border-radius: 30px;
+      font-weight: 700;
+      text-decoration: none;
+      margin-top: 1rem;
+      box-shadow: 0 4px 8px rgb(0 77 64 / 0.3);
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    a.button:hover,
+    a.button:focus {
+      background: #00796b;
+      transform: scale(1.05);
+      outline: none;
+    }
+    /* Images styling */
+    .service-image {
+      width: 100%;
+      max-height: 280px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 6px 12px rgb(0 0 0 / 0.1);
+      transition: transform 0.4s ease;
+    }
+    .service-image:hover {
+      transform: scale(1.03);
+    }
+    footer {
+      background: #004d40;
+      color: #cfd8dc;
+      text-align: center;
+      padding: 1.2rem 1rem;
+      font-size: 0.9rem;
+      margin-top: auto;
+    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+      }
+      nav a {
+        padding: 0.8rem 1rem;
+        border-top: 1px solid #004d40;
+      }
+      nav a:first-child {
+        border-top: none;
+      }
+      section {
+        padding: 1.5rem 1.5rem;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+      section h2 {
+        font-size: 1.6rem;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
