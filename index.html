@@ -8,15 +8,54 @@
 
 </head>
 <script>
-  // --- MENU HAMBURGER POUR SMARTPHONE ---
+document.addEventListener('DOMContentLoaded', () => {
   const menuToggle = document.querySelector('.menu-toggle');
   const navLinks = document.querySelector('.nav-links');
+  const MOBILE_BREAKPOINT = 600; // doit rester cohérent avec le @media
 
-  menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('show');
+  if (!menuToggle || !navLinks) return;
+
+  // Toggle menu
+  menuToggle.addEventListener('click', (e) => {
+    const opened = navLinks.classList.toggle('show');
+    menuToggle.setAttribute('aria-expanded', opened ? 'true' : 'false');
   });
-</script>
 
+  // Close menu when clicking outside (on small screens)
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth <= MOBILE_BREAKPOINT && navLinks.classList.contains('show')) {
+      // si le clic n'est pas dans la nav-container, fermer
+      if (!e.target.closest('.nav-container')) {
+        navLinks.classList.remove('show');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    }
+  });
+
+  // Close menu on ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navLinks.classList.contains('show')) {
+      navLinks.classList.remove('show');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.focus();
+    }
+  });
+
+  // If window is resized to desktop width, ensure menu is closed
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > MOBILE_BREAKPOINT && navLinks.classList.contains('show')) {
+      navLinks.classList.remove('show');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Safety: initial state correct (in case of previous state/caching)
+  if (window.innerWidth > MOBILE_BREAKPOINT) {
+    navLinks.classList.remove('show');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  }
+});
+</script>
 <body>
 <header>
   <div class="header-container">
@@ -30,18 +69,21 @@
 
 <nav class="navbar" aria-label="Navigation principale">
   <div class="nav-container">
-    <button class="menu-toggle" aria-label="Ouvrir le menu">☰</button>
+    <button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="primary-navigation">
+      &#9776;
+    </button>
 
-    <ul class="nav-links">
-      <li><a href="#presentation">Présentation</a></li>
-      <li><a href="#cuisine">Service de Cuisine</a></li>
-      <li><a href="#accueil">Accueil & Protocole</a></li>
-      <li><a href="#bar">Bar & Cocktails</a></li>
-      <li><a href="#galerie">Galerie</a></li>
-      <li><a href="#contact">Contact</a></li>
+    <ul id="primary-navigation" class="nav-links" role="menubar">
+      <li role="none"><a role="menuitem" href="#presentation">Présentation</a></li>
+      <li role="none"><a role="menuitem" href="#cuisine">Service de Cuisine</a></li>
+      <li role="none"><a role="menuitem" href="#accueil">Accueil &amp; Protocole</a></li>
+      <li role="none"><a role="menuitem" href="#bar">Bar &amp; Cocktails</a></li>
+      <li role="none"><a role="menuitem" href="#galerie">Galerie</a></li>
+      <li role="none"><a role="menuitem" href="#contact">Contact</a></li>
     </ul>
   </div>
 </nav>
+
   <main>
     <section id="presentation" tabindex="0">
       <img src="img/ban_2glo.jpg" alt="Événement mariage élégant" class="service-image" />
