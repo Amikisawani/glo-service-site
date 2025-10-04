@@ -13,62 +13,34 @@
       display: flex;
       flex-direction: column;
     }
-    header {
-    background: linear-gradient(135deg, #1b2422 0%, #081716 100%);
-    color: #fff;
-    padding: 1.5rem 1rem;
-    position: relative;
-    overflow: hidden;
-    }
-    .header-container {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* centré horizontalement */
-    gap: 1.5rem; /* espace entre logo et texte */
-    flex-wrap: wrap;
-    text-align: left;
-    }
-    .logo {
-    max-width: 120px;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-    animation: fadeIn 1.5s ease forwards;
-    }
-    .header-text h1 {
-    font-size: 2.6rem;
-    margin-bottom: 0.3rem;
-    font-weight: 700;
-    animation: slideDown 1s ease forwards;
-    }
-    .header-text p {
-    font-size: 1.2rem;
-    font-style: italic;
-    opacity: 0.9;
-    animation: fadeIn 2s ease forwards;
-    }
-    /* Responsive : logo au-dessus du texte */
-    @media (max-width: 700px) {
-    .header-container {
-        flex-direction: column;
-        text-align: center;
-    }
-    .logo {
-        max-width: 90px;
-        margin-bottom: 0.8rem;
-    }
-    }
-    
-    nav {
-      background: #00796b;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }/* ===== NAV RESPONSIVE (smartphone only) ===== */
+   /* ===== HEADER ===== */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  gap: 10px;
+}
+
+.logo {
+  height: 70px;
+  width: auto;
+  border-radius: 8px;
+}
+
+.header-text h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #00796b;
+}
+
+.header-text p {
+  margin: 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* ===== NAV ===== */
 .navbar {
   background-color: #fff;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
@@ -84,67 +56,91 @@
   padding: 10px 20px;
 }
 
-/* Desktop/default */
 .nav-links {
   list-style: none;
   display: flex;
   gap: 20px;
   margin: 0;
   padding: 0;
-  align-items: center;
 }
 
 .nav-links a {
   text-decoration: none;
   color: #00796b;
   font-weight: 600;
-  padding: 8px 6px;
+  transition: color 0.3s ease;
 }
 
-/* hamburger hidden by default (desktop) */
+.nav-links a:hover {
+  color: #004d40;
+}
+
+/* ===== MOBILE ADAPTATION ===== */
 .menu-toggle {
   display: none;
   font-size: 28px;
   background: none;
   border: none;
   cursor: pointer;
-  line-height: 1;
 }
 
-/* ===== Only apply mobile behavior under 600px ===== */
+.mobile-brand {
+  display: none; /* affiché uniquement sur mobile */
+  align-items: center;
+  gap: 8px;
+}
+
+.mobile-logo {
+  height: 32px;
+  width: auto;
+  border-radius: 4px;
+}
+
+.mobile-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #00796b;
+}
+
+/* --- Responsive Smartphone --- */
 @media (max-width: 600px) {
-  .menu-toggle {
-    display: block; /* visible on smartphones */
+  /* Header disparaît */
+  header {
+    display: none;
   }
 
-  /* Stack menu vertically and hide with max-height trick for smooth open/close */
+  .menu-toggle {
+    display: block;
+  }
+
+  .mobile-brand {
+    display: flex;
+  }
+
+  .nav-container {
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
   .nav-links {
     position: absolute;
-    top: 56px; /* adjust if header taller */
+    top: 56px;
     left: 0;
     right: 0;
     background-color: #fff;
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
     align-items: center;
     padding: 0 10px;
-    border-top: 1px solid #e6e6e6;
+    border-top: 1px solid #ddd;
     overflow: hidden;
-    max-height: 0;              /* hidden by default */
-    transition: max-height 0.34s ease, padding 0.2s ease;
+    max-height: 0;
+    transition: max-height 0.3s ease;
   }
 
-  /* When menu opened */
   .nav-links.show {
-    max-height: 420px;          /* large enough to show items, adjust if many links */
+    max-height: 420px;
     padding: 12px 0;
-  }
-
-  .nav-links a {
-    display: block;
-    width: 100%;
-    text-align: center;
-    padding: 10px 6px;
   }
 }
 
